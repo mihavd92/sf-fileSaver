@@ -1,0 +1,51 @@
+<template>
+  <lightning-card title="File Saver">
+      <div class="slds-m-around_medium">
+          <lightning-input type="search" label="Search" onchange={handleSearch}></lightning-input>
+      </div>
+      <template for:each={paginatedFilesList} for:item="file">
+          <div key={file.value} class="slds-box table-row"
+              data-id={file.value}
+              onmouseover={handleMouseOver}
+              onmouseout={handleMouseOut}>
+              <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+                      <p>{file.label} <span class="hover-content">{file.size}</span></p>
+                  </div>
+                  <div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+                      <a href={file.url} download>
+                          <lightning-button label="Download" variant="brand"></lightning-button>
+                      </a>
+                  </div>
+                  <div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+                      <lightning-button label="Preview" 
+                          variant="neutral"
+                          class="preview-button"
+                          data-id={file.value}
+                          onclick={previewHandler}
+                      ></lightning-button>
+                  </div>
+              </div>
+          </div>
+      </template>
+      <div class="slds-m-around_medium slds-grid slds-grid_vertical-align-end slds-grid_align-spread">
+          <div>
+              <lightning-combobox
+                  name="pageSize"
+                  label="Items per page"
+                  value={pageSize}
+                  placeholder="Select number of items per page"
+                  options={pageSizeOptions}
+                  onchange={handlePageSizeChange}>
+              </lightning-combobox>
+          </div>
+          <div class="slds-text-align_right">
+              <lightning-button-group>
+                  <lightning-button label="Previous" onclick={handlePreviousPage} disabled={disablePrevious}></lightning-button>
+                  <lightning-button label="Next" onclick={handleNextPage} disabled={disableNext}></lightning-button>
+              </lightning-button-group>
+              <p>Page {currentPage} of {totalPages}</p>
+          </div>
+      </div>
+  </lightning-card>
+</template>

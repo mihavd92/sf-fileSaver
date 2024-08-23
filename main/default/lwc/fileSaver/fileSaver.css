@@ -1,0 +1,17 @@
+.table-row:hover .preview-button, 
+.table-row:hover .hover-content {
+    opacity: 1;
+}
+
+.preview-button, 
+.hover-content {
+    transition: opacity 0.3s ease-in-out; 
+    opacity: 0;
+}
+
+.hover-content {
+    margin-left: 15px;
+    font-style: italic;
+    color: #ccc;
+}
+
